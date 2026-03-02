@@ -1,0 +1,462 @@
+{
+  "schemes": [
+    {
+      "id": "pm-kisan",
+      "title": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+      "ministry": "Ministry of Agriculture & Farmers Welfare",
+      "description": "An initiative by the government of India in which all farmers will get up to ₹6,000 per year as minimum income support.",
+      "sourceUrl": "https://pmkisan.gov.in/",
+      "eligibility": {
+        "occupation": ["Farmer"],
+        "maxLandholdingHectares": 2.0
+      },
+      "benefits": [
+        "₹6,000 per year",
+        "Direct Benefit Transfer (DBT) into bank accounts"
+      ],
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "ayushman-bharat",
+      "title": "Ayushman Bharat Pradhan Mantri Jan Arogya Yojana (PM-JAY)",
+      "ministry": "Ministry of Health and Family Welfare",
+      "description": "Providing health cover of ₹5 lakhs per family per year for secondary and tertiary care hospitalization to poor and vulnerable families.",
+      "sourceUrl": "https://pmjay.gov.in/",
+      "eligibility": {
+        "socialCategory": ["BPL", "SC", "ST"]
+      },
+      "benefits": [
+        "Health cover up to ₹5,00,000 per family per year",
+        "Cashless access to health care services for the beneficiary at the point of service"
+      ],
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "pm-egp",
+      "title": "Prime Minister's Employment Generation Programme (PMEGP)",
+      "ministry": "Ministry of Micro, Small and Medium Enterprises",
+      "description": "Credit-linked subsidy scheme aimed at generating self-employment opportunities through establishment of micro-enterprises.",
+      "sourceUrl": "https://www.kviconline.gov.in/pmegpeportal",
+      "eligibility": {
+        "minAge": 18,
+        "occupation": ["Unemployed", "Self-Employed", "MSME"]
+      },
+      "benefits": [
+        "Margin Money subsidy of 15% to 35% of project cost",
+        "Bank loan of 90% to 95% of the project cost"
+      ],
+      "lifecycleState": "Active"
+    },
+    {
+       "id": "nsigse",
+       "title": "National Scheme of Incentive to Girls for Secondary Education",
+       "ministry": "Department of School Education & Literacy",
+       "description": "To promote enrollment of girl child in the age group of 14-18 at secondary stage, especially those who passed Class VIII.",
+       "sourceUrl": "https://dsel.education.gov.in/scheme/nsigse",
+       "eligibility": {
+          "gender": "Female",
+          "socialCategory": ["SC", "ST"],
+          "minAge": 14,
+          "maxAge": 18,
+          "occupation": ["Student"]
+       },
+       "benefits": [
+         "Sum of ₹3000 deposited as fixed deposit",
+         "Withdrawal allowed upon reaching 18 years of age and passing 10th class."
+       ],
+       "lifecycleState": "Active"
+    },
+    {
+       "id": "stand-up-india",
+       "title": "Stand-up India Scheme",
+       "ministry": "Department of Financial Services",
+       "description": "Facilitate bank loans between ₹10 lakh and ₹1 Crore to at least one SC/ST borrower and one woman borrower per bank branch for setting up a greenfield enterprise.",
+       "sourceUrl": "https://www.standupmitra.in/",
+       "eligibility": {
+          "minAge": 18,
+          "socialCategory": ["SC", "ST"],
+          "gender": "Female",
+          "occupation": ["Self-Employed", "Unemployed"]
+       },
+       "benefits": [
+         "Bank loan between ₹10 lakh and ₹1 Crore"
+       ],
+       "lifecycleState": "Active"
+    },
+    {
+       "id": "pm-svanidhi",
+       "title": "PM Street Vendor's AtmaNirbhar Nidhi (PM SVANidhi)",
+       "ministry": "Ministry of Housing & Urban Affairs",
+       "description": "A special micro-credit facility to provide affordable loans to street vendors.",
+       "sourceUrl": "https://pmsvanidhi.mohua.gov.in/",
+       "eligibility": {
+          "occupation": ["Self-Employed"]
+       },
+       "benefits": [
+         "Working capital loan up to ₹10,000",
+         "Interest subsidy of 7% per annum on regular repayment",
+         "Incentives on digital transactions"
+       ],
+       "lifecycleState": "Active"
+    },
+    {
+       "id": "pmy",
+       "title": "Pradhan Mantri Awas Yojana (PMAY-U)",
+       "ministry": "Ministry of Housing & Urban Affairs",
+       "description": "Provides central assistance to implementing agencies through States/UTs to provide houses to all eligible families against the validated demand.",
+       "sourceUrl": "https://pmaymis.gov.in/",
+       "eligibility": {
+          "maxIncomeMonthly": 50000,
+          "socialCategory": ["BPL", "EWS", "LIG"]
+       },
+       "benefits": [
+         "Subsidized housing loans",
+         "Direct financial assistance for house construction"
+       ],
+       "lifecycleState": "Active"
+    },
+    {
+       "id": "digital-india-internship",
+       "title": "Digital India Internship Scheme",
+       "ministry": "Ministry of Electronics & Information Technology",
+       "description": "Opportunity for students to secure practical experience related to Ministry’s activities.",
+       "sourceUrl": "https://www.meity.gov.in/internship-scheme",
+       "eligibility": {
+          "occupation": ["Student"]
+       },
+       "benefits": [
+         "Stipend of ₹10,000 per month",
+         "Certificate of Internship"
+       ],
+       "lifecycleState": "Active"
+    },
+    {
+       "id": "pm-uby",
+       "title": "Upcoming: PM Universal Basic Youth Income",
+       "ministry": "Ministry of Finance",
+       "description": "OVERVIEW: This is a proposed scheme currently under discussion by the government. It aims to provide a baseline digital allowance to all qualifying students to support digital learning access. *NOTE: This scheme is not yet approved and is purely under parliament discussion.*",
+       "sourceUrl": "https://pib.gov.in/",
+       "eligibility": {
+          "occupation": ["Student"],
+          "minAge": 16,
+          "maxAge": 24,
+          "maxIncomeMonthly": 15000
+       },
+       "benefits": [
+         "Proposed ₹1,500 monthly digital stipend",
+         "Free baseline 5G internet data tier (Proposed)"
+       ],
+       "lifecycleState": "Upcoming"
+    },
+    {
+       "id": "national-agri-drone",
+       "title": "Upcoming: National Agri-Drone Subsidy Initiative",
+       "ministry": "Ministry of Agriculture & Farmers Welfare",
+       "description": "OVERVIEW: Under discussion phase by the cabinet. This scheme aims to subsidize drone purchases for farmers to modernize pesticide administration and crop monitoring. *NOTE: This scheme is primarily in discussion phase, await final cabinet approval notification.*",
+       "sourceUrl": "https://agricoop.nic.in/",
+       "eligibility": {
+          "occupation": ["Farmer"],
+          "maxLandholdingHectares": 10.0
+       },
+       "benefits": [
+         "Proposed 50% subsidy on agricultural drone purchases",
+         "Free drone piloting certification training"
+       ],
+       "lifecycleState": "Upcoming"
+    },
+    {
+      "id": "pm-fasal-bima",
+      "title": "Pradhan Mantri Fasal Bima Yojana (PMFBY)",
+      "ministry": "Ministry of Agriculture & Farmers Welfare",
+      "description": "Crop insurance scheme providing financial support to farmers in case of crop loss due to natural calamities.",
+      "sourceUrl": "https://pmfby.gov.in/",
+      "eligibility": {
+        "occupation": ["Farmer"]
+      },
+      "benefits": [
+        "Insurance coverage for crop loss",
+        "Low premium rates for farmers"
+      ],
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "atal-pension-yojana",
+      "title": "Atal Pension Yojana (APY)",
+      "ministry": "Ministry of Finance",
+      "description": "Pension scheme focused on workers in the unorganized sector.",
+      "sourceUrl": "https://www.npscra.nsdl.co.in/",
+      "eligibility": {
+        "minAge": 18,
+        "maxAge": 40,
+        "occupation": ["Unemployed", "Self-Employed"]
+      },
+      "benefits": [
+        "Guaranteed pension after 60 years"
+      ],
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "pm-jan-dhan",
+      "title": "Pradhan Mantri Jan Dhan Yojana (PMJDY)",
+      "ministry": "Ministry of Finance",
+      "description": "Financial inclusion program providing bank accounts to unbanked citizens.",
+      "sourceUrl": "https://pmjdy.gov.in/",
+      "eligibility": {},
+      "benefits": [
+        "Zero balance bank account",
+        "Accident insurance cover"
+      ],
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "pm-ujjwala",
+      "title": "Pradhan Mantri Ujjwala Yojana (PMUY)",
+      "ministry": "Ministry of Petroleum & Natural Gas",
+      "description": "Provides LPG connections to women from economically weaker households.",
+      "sourceUrl": "https://www.pmuy.gov.in/",
+      "eligibility": {
+        "gender": "Female",
+        "socialCategory": ["BPL"]
+      },
+      "benefits": [
+        "Free LPG connection",
+        "Subsidized refills"
+      ],
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "mudra-yojana",
+      "title": "Pradhan Mantri Mudra Yojana (PMMY)",
+      "ministry": "Ministry of Finance",
+      "description": "Provides loans up to ₹10 lakh for micro and small enterprises.",
+      "sourceUrl": "https://www.mudra.org.in/",
+      "eligibility": {
+        "minAge": 18,
+        "occupation": ["Self-Employed", "MSME", "Unemployed"]
+      },
+      "benefits": [
+        "Collateral-free business loans"
+      ],
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "pm-kaushal-vikas",
+      "title": "Pradhan Mantri Kaushal Vikas Yojana (PMKVY)",
+      "ministry": "Ministry of Skill Development & Entrepreneurship",
+      "description": "Skill training initiative aimed at improving employability of youth.",
+      "sourceUrl": "https://www.pmkvyofficial.org/",
+      "eligibility": {
+        "occupation": ["Student", "Unemployed"]
+      },
+      "benefits": [
+        "Free skill training",
+        "Industry-recognized certification"
+      ],
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "national-health-mission",
+      "title": "National Health Mission (NHM)",
+      "ministry": "Ministry of Health & Family Welfare",
+      "description": "Strengthens public healthcare systems across rural and urban India.",
+      "sourceUrl": "https://nhm.gov.in/",
+      "eligibility": {},
+      "benefits": [
+        "Improved public health services"
+      ],
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "pm-suraksha-bima",
+      "title": "Pradhan Mantri Suraksha Bima Yojana (PMSBY)",
+      "ministry": "Ministry of Finance",
+      "description": "Accidental insurance scheme for Indian citizens.",
+      "sourceUrl": "https://jansuraksha.gov.in/",
+      "eligibility": {
+        "minAge": 18,
+        "maxAge": 70
+      },
+      "benefits": [
+        "Accident insurance cover up to ₹2 lakh"
+      ],
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "pm-jeevan-jyoti",
+      "title": "Pradhan Mantri Jeevan Jyoti Bima Yojana (PMJJBY)",
+      "ministry": "Ministry of Finance",
+      "description": "Life insurance scheme offering affordable coverage.",
+      "sourceUrl": "https://jansuraksha.gov.in/",
+      "eligibility": {
+        "minAge": 18,
+        "maxAge": 50
+      },
+      "benefits": [
+        "Life insurance cover of ₹2 lakh"
+      ],
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "national-apprenticeship",
+      "title": "National Apprenticeship Promotion Scheme (NAPS)",
+      "ministry": "Ministry of Skill Development & Entrepreneurship",
+      "description": "Encourages apprenticeship training to enhance employability.",
+      "sourceUrl": "https://www.apprenticeshipindia.gov.in/",
+      "eligibility": {
+        "minAge": 14,
+        "occupation": ["Student", "Unemployed"]
+      },
+      "benefits": [
+        "Stipend support",
+        "Hands-on industry training"
+      ],
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "national-greens-mission",
+      "title": "National Greening Mission",
+      "ministry": "Ministry of Environment, Forest & Climate Change",
+      "description": "Focuses on afforestation and increasing green cover across India.",
+      "sourceUrl": "https://moef.gov.in/",
+      "eligibility": {},
+      "benefits": [
+        "Tree plantation support",
+        "Community forestry benefits"
+      ],
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "sukanya-samriddhi-yojana",
+      "title": "Sukanya Samriddhi Yojana",
+      "ministry": "Ministry of Finance",
+      "description": "Savings scheme for girl child to build a secure future.",
+      "sourceUrl": "https://www.nsiindia.gov.in/",
+      "eligibility": {
+        "gender": "Female",
+        "minAge": 0,
+        "maxAge": 10
+      },
+      "benefits": [
+        "High interest savings",
+        "Tax benefits"
+      ],
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "jansuraksha-yojana",
+      "title": "Jan Suraksha Schemes",
+      "ministry": "Ministry of Finance",
+      "description": "Grouped social security schemes for citizens via insurance benefits.",
+      "sourceUrl": "https://jansuraksha.gov.in/",
+      "eligibility": {
+        "minAge": 18
+      },
+      "benefits": [
+        "Life & accident insurance options",
+        "Affordable coverage"
+      ],
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "national-jute-scheme",
+      "title": "National Jute Board Scheme",
+      "ministry": "Ministry of Textiles",
+      "description": "Supports jute farmers and promotes jute-based products.",
+      "sourceUrl": "https://jute.com/",
+      "eligibility": {
+        "occupation": ["Farmer"]
+      },
+      "benefits": [
+        "Subsidies for jute cultivation",
+        "Support for jute artisans"
+      ],
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "pradhan-mantri-kaushal-plus",
+      "title": "Pradhan Mantri Kaushal Plus (PMKVY+)",
+      "ministry": "Ministry of Skill Development & Entrepreneurship",
+      "description": "Advanced skill training program for youth upskilling.",
+      "sourceUrl": "https://www.pmkvyofficial.org/",
+      "eligibility": {
+        "occupation": ["Student", "Unemployed"]
+      },
+      "benefits": [
+        "Advanced certified training",
+        "Placement support"
+      ],
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "credit-guarantee-fund-msme",
+      "title": "Credit Guarantee Fund Trust for Micro and Small Enterprises (CGTMSE)",
+      "ministry": "Ministry of Micro, Small & Medium Enterprises",
+      "description": "Provides collateral-free credit to MSMEs.",
+      "sourceUrl": "https://www.cgtmse.in/",
+      "eligibility": {
+        "occupation": ["MSME", "Self-Employed"]
+      },
+      "benefits": [
+        "Collateral-free business loans",
+        "Credit guarantee support"
+      ],
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "anta-pradesh-nari-shakti",
+      "title": "Uttar Pradesh Nari Shakti Yojana",
+      "ministry": "Department of Women & Child Development (Uttar Pradesh)",
+      "description": "Empowers women through skill training, financial support, and entrepreneurship",
+      "sourceUrl": "https://wcd.up.gov.in/",
+      "eligibility": {
+        "gender": "Female"
+      },
+      "benefits": [
+        "Skill training",
+        "Business support"
+      ],
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "pradhan-mantri-gramsadak-yojana",
+      "title": "Pradhan Mantri Gram Sadak Yojana (PMGSY)",
+      "ministry": "Ministry of Rural Development",
+      "description": "Develops rural road infrastructure across India.",
+      "sourceUrl": "https://pmgsy.nic.in/",
+      "eligibility": {},
+      "benefits": [
+        "Rural road connectivity",
+        "Infrastructure support"
+      ],
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "national-digital-literacy",
+      "title": "National Digital Literacy Mission",
+      "ministry": "Ministry of Electronics & IT",
+      "description": "Promotes digital literacy among citizens across India.",
+      "sourceUrl": "https://www.digitalindia.gov.in/",
+      "eligibility": {},
+      "benefits": [
+        "Digital literacy training",
+        "Certificate of completion"
+      ],
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "pradhan-mantri-vaya-vandan-yojana",
+      "title": "Pradhan Mantri Vaya Vandana Yojana (PMVVY)",
+      "ministry": "Ministry of Finance",
+      "description": "Pension scheme for senior citizens aged 60 years and above.",
+      "sourceUrl": "https://www.pensionseva.in/",
+      "eligibility": {
+        "minAge": 60
+      },
+      "benefits": [
+        "Guaranteed pension return",
+        "Tax benefits"
+      ],
+      "lifecycleState": "Active"
+    }   
+  ]
+}
