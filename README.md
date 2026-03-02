@@ -78,4 +78,4 @@ A custom-built React component that maintains conversation history and streams r
 - **In-Memory Processing**: The Next.js API routes process the JSON payload instantly without saving state to an external SQL/NoSQL database.
 
 ## 👨‍💻 Developed By
-**Satyam Patil** - Project Lead, Navira AI
+Navira AI
