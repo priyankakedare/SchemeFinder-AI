@@ -12,7 +12,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const apiKey = process.env.GEMINI_API_KEY;
+    const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 
     let context =
       "You are Navira AI Assistant for SchemeFinder AI. Provide accurate, professional responses about Indian government schemes.\n\n";
@@ -25,11 +25,11 @@ export async function POST(request: Request) {
 
     context += `\nUser: ${message}`;
 
-    // 🔥 STEP 1 — TRY GEMINI FIRST
+    // ✅ STEP 1 — Try Gemini
     if (apiKey) {
       try {
         const response = await fetch(
-          `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${apiKey}`,
+          `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
           {
             method: "POST",
             headers: {
@@ -58,13 +58,16 @@ export async function POST(request: Request) {
               reply: data.candidates[0].content.parts[0].text,
             });
           }
+        } else {
+          const errorText = await response.text();
+          console.error("Gemini HTTP Error:", errorText);
         }
-      } catch (geminiError) {
+      } catch (err) {
         console.error("Gemini failed, switching to fallback.");
       }
     }
 
-    // 🔥 STEP 2 — FALLBACK (Deterministic Assistant)
+    // ✅ STEP 2 — Fallback (Always Works)
 
     const lowerMessage = message.toLowerCase();
 
@@ -90,14 +93,7 @@ ${matchedScheme.benefits.map((b: string) => "- " + b).join("\n")}
     if (lowerMessage.includes("eligible")) {
       return NextResponse.json({
         reply:
-          "Eligibility depends on age, income, occupation, and category. Please review the scheme eligibility shown above."
-      });
-    }
-
-    if (lowerMessage.includes("difference")) {
-      return NextResponse.json({
-        reply:
-          "You can compare schemes based on benefits and eligibility criteria. Please mention which two schemes."
+          "Eligibility depends on age, income, occupation, and social category. Please check the scheme details shown above."
       });
     }
 
