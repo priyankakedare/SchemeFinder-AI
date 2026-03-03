@@ -14,45 +14,65 @@ export async function POST(request: Request) {
     const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 
     if (!apiKey) {
+      console.error("Gemini API key not found.");
       return NextResponse.json(
-        { reply: "AI service not configured." },
+        { reply: "AI service not configured properly." },
         { status: 200 }
       );
     }
 
     let context =
-      "You are Navira AI Assistant for SchemeFinder AI. Provide accurate, professional responses.\n\n";
+      "You are Navira AI Assistant for SchemeFinder AI. Provide accurate, professional and concise responses about Indian government schemes. Do not hallucinate.\n\n";
 
-    if (history?.length) {
+    if (history && history.length > 0) {
       history.forEach((msg: any) => {
-        context += `${msg.role}: ${msg.content}\n`;
+        context += `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}\n`;
       });
     }
 
-    context += `User: ${message}`;
+    context += `\nUser: ${message}`;
 
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           contents: [
             {
-              parts: [{ text: context }]
-            }
-          ]
-        })
+              parts: [{ text: context }],
+            },
+          ],
+        }),
       }
     );
 
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Gemini HTTP error:", errorText);
+      return NextResponse.json({
+        reply: "AI service temporarily unavailable.",
+      });
+    }
+
     const data = await response.json();
 
-    const reply =
-      data?.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "I couldn't process your request.";
+    console.log("Gemini raw response:", JSON.stringify(data));
+
+    let reply = "AI response format unexpected.";
+
+    if (
+      data &&
+      data.candidates &&
+      data.candidates.length > 0 &&
+      data.candidates[0].content &&
+      data.candidates[0].content.parts &&
+      data.candidates[0].content.parts.length > 0
+    ) {
+      reply = data.candidates[0].content.parts[0].text;
+    }
 
     return NextResponse.json({ reply });
 
