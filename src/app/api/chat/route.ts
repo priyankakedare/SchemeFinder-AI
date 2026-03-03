@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     }
 
     let context =
-      "You are Navira AI Assistant for SchemeFinder AI. Provide accurate, professional and concise responses about Indian government schemes. Do not hallucinate.\n\n";
+      "You are Navira AI Assistant for SchemeFinder AI. Provide accurate and professional responses.\n\n";
 
     if (history && history.length > 0) {
       history.forEach((msg: any) => {
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
     context += `\nUser: ${message}`;
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
       {
         method: "POST",
         headers: {
@@ -49,11 +49,13 @@ export async function POST(request: Request) {
       }
     );
 
+    // 🔥 DEBUG BLOCK — show real Google error
     if (!response.ok) {
       const errorText = await response.text();
       console.error("Gemini HTTP error:", errorText);
+
       return NextResponse.json({
-        reply: "AI service temporarily unavailable.",
+        reply: "Gemini Error: " + errorText,
       });
     }
 
@@ -76,10 +78,11 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ reply });
 
-  } catch (error) {
+  } catch (error: any) {
     console.error("CHAT API ERROR:", error);
+
     return NextResponse.json(
-      { reply: "AI service error. Please try again shortly." },
+      { reply: "Server Error: " + error?.message },
       { status: 200 }
     );
   }
