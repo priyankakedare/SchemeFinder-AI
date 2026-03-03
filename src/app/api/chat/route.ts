@@ -15,13 +15,13 @@ export async function POST(request: Request) {
 
     if (!apiKey) {
       return NextResponse.json(
-        { reply: "AI service not configured properly." },
+        { reply: "AI service not configured." },
         { status: 200 }
       );
     }
 
     let context =
-      "You are Navira AI Assistant for SchemeFinder AI. Provide accurate and professional responses.\n\n";
+      "You are Navira AI Assistant for SchemeFinder AI. Provide accurate, professional responses.\n\n";
 
     if (history?.length) {
       history.forEach((msg: any) => {
