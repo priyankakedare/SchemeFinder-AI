@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import schemesData from '../../../data/schemes.json';
 
 export async function POST(request: Request) {
   try {
@@ -11,19 +12,10 @@ export async function POST(request: Request) {
       );
     }
 
-    const apiKey = process.env.GEMINI_API_KEY || process.env.NEXT_PUBLIC_GEMINI_API_KEY;
-
-
-
-    if (!apiKey) {
-      return NextResponse.json(
-        { reply: "AI service not configured properly." },
-        { status: 200 }
-      );
-    }
+    const apiKey = process.env.GEMINI_API_KEY;
 
     let context =
-      "You are Navira AI Assistant for SchemeFinder AI. Provide accurate, professional, and concise responses about Indian government schemes. Do not hallucinate.\n\n";
+      "You are Navira AI Assistant for SchemeFinder AI. Provide accurate, professional responses about Indian government schemes.\n\n";
 
     if (history && history.length > 0) {
       history.forEach((msg: any) => {
@@ -33,54 +25,90 @@ export async function POST(request: Request) {
 
     context += `\nUser: ${message}`;
 
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          contents: [
-            {
-              parts: [{ text: context }],
+    // 🔥 STEP 1 — TRY GEMINI FIRST
+    if (apiKey) {
+      try {
+        const response = await fetch(
+          `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${apiKey}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
             },
-          ],
-        }),
+            body: JSON.stringify({
+              contents: [
+                {
+                  parts: [{ text: context }],
+                },
+              ],
+            }),
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+
+          if (
+            data &&
+            data.candidates &&
+            data.candidates.length > 0 &&
+            data.candidates[0].content?.parts?.length > 0
+          ) {
+            return NextResponse.json({
+              reply: data.candidates[0].content.parts[0].text,
+            });
+          }
+        }
+      } catch (geminiError) {
+        console.error("Gemini failed, switching to fallback.");
       }
+    }
+
+    // 🔥 STEP 2 — FALLBACK (Deterministic Assistant)
+
+    const lowerMessage = message.toLowerCase();
+
+    const matchedScheme = schemesData.schemes.find((scheme: any) =>
+      lowerMessage.includes(scheme.title.toLowerCase())
     );
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Gemini HTTP error:", errorText);
-
+    if (matchedScheme) {
       return NextResponse.json({
-        reply: "Gemini Error: " + errorText,
+        reply: `
+${matchedScheme.title}
+
+Ministry: ${matchedScheme.ministry}
+
+Description: ${matchedScheme.description}
+
+Benefits:
+${matchedScheme.benefits.map((b: string) => "- " + b).join("\n")}
+`
       });
     }
 
-    const data = await response.json();
-
-    let reply = "AI response format unexpected.";
-
-    if (
-      data &&
-      data.candidates &&
-      data.candidates.length > 0 &&
-      data.candidates[0].content &&
-      data.candidates[0].content.parts &&
-      data.candidates[0].content.parts.length > 0
-    ) {
-      reply = data.candidates[0].content.parts[0].text;
+    if (lowerMessage.includes("eligible")) {
+      return NextResponse.json({
+        reply:
+          "Eligibility depends on age, income, occupation, and category. Please review the scheme eligibility shown above."
+      });
     }
 
-    return NextResponse.json({ reply });
+    if (lowerMessage.includes("difference")) {
+      return NextResponse.json({
+        reply:
+          "You can compare schemes based on benefits and eligibility criteria. Please mention which two schemes."
+      });
+    }
 
-  } catch (error: any) {
-    console.error("CHAT API ERROR:", error);
+    return NextResponse.json({
+      reply:
+        "I can help you understand government schemes and eligibility. Please ask about a specific scheme."
+    });
 
+  } catch (error) {
     return NextResponse.json(
-      { reply: "Server Error: " + error?.message },
+      { reply: "Chat service temporarily unavailable." },
       { status: 200 }
     );
   }
