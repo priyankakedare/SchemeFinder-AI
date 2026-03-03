@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone'
-}
+  output: 'standalone',
 
-module.exports = nextConfig
+  // Expose environment variable to server runtime
+  env: {
+    GEMINI_API_KEY: process.env.GEMINI_API_KEY,
+  },
+};
+
+module.exports = nextConfig;

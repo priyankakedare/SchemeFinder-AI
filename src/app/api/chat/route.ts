@@ -12,27 +12,28 @@ export async function POST(request: Request) {
       );
     }
 
-    // Check API key FIRST
-    if (!process.env.GEMINI_API_KEY) {
+    const apiKey = process.env.GEMINI_API_KEY;
+
+    if (!apiKey) {
+      console.error("GEMINI_API_KEY is missing in production.");
       return NextResponse.json(
         {
           reply:
-            'AI service is not configured properly. Please contact administrator.'
+            "AI service is not configured properly. Please contact administrator."
         },
         { status: 200 }
       );
     }
 
-    // Create AI instance safely INSIDE function
     const ai = new GoogleGenAI({
-      apiKey: process.env.GEMINI_API_KEY
+      apiKey: apiKey
     });
 
     let conversationContext =
-      "You are the Navira AI Assistant for 'SchemeFinder AI', a government-grade platform for discovering Indian government schemes. Provide accurate, concise, professional responses. Do NOT hallucinate eligibility. If unsure, say you don't know.\n\n";
+      "You are the Navira AI Assistant for 'SchemeFinder AI'. Provide accurate, concise, and professional responses. Do NOT hallucinate.\n\n";
 
     if (history && history.length > 0) {
-      conversationContext += "Recent conversation:\n";
+      conversationContext += "Conversation history:\n";
       history.forEach((msg: any) => {
         conversationContext += `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}\n`;
       });
@@ -53,7 +54,6 @@ export async function POST(request: Request) {
 
   } catch (error: any) {
     console.error('CHAT API ERROR:', error);
-
     return NextResponse.json(
       {
         reply:
