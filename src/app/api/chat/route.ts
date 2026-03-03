@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { GoogleGenAI } from '@google/genai';
 
 export async function POST(request: Request) {
   try {
@@ -15,50 +14,52 @@ export async function POST(request: Request) {
     const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
-      console.error("GEMINI_API_KEY is missing in production.");
       return NextResponse.json(
-        {
-          reply:
-            "AI service is not configured properly. Please contact administrator."
-        },
+        { reply: "AI service not configured properly." },
         { status: 200 }
       );
     }
 
-    const ai = new GoogleGenAI({
-      apiKey: apiKey
-    });
+    let context =
+      "You are Navira AI Assistant for SchemeFinder AI. Provide accurate and professional responses.\n\n";
 
-    let conversationContext =
-      "You are the Navira AI Assistant for 'SchemeFinder AI'. Provide accurate, concise, and professional responses. Do NOT hallucinate.\n\n";
-
-    if (history && history.length > 0) {
-      conversationContext += "Conversation history:\n";
+    if (history?.length) {
       history.forEach((msg: any) => {
-        conversationContext += `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}\n`;
+        context += `${msg.role}: ${msg.content}\n`;
       });
     }
 
-    conversationContext += `\nUser: ${message}`;
+    context += `User: ${message}`;
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-1.5-flash',
-      contents: conversationContext,
-    });
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [{ text: context }]
+            }
+          ]
+        })
+      }
+    );
+
+    const data = await response.json();
 
     const reply =
-      response?.text?.trim() ||
-      "I'm sorry, I couldn't process that request at the moment.";
+      data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "I couldn't process your request.";
 
     return NextResponse.json({ reply });
 
-  } catch (error: any) {
-    console.error('CHAT API ERROR:', error);
+  } catch (error) {
+    console.error("CHAT API ERROR:", error);
     return NextResponse.json(
-      {
-        reply:
-          "I encountered an issue connecting to the AI service. Please try again shortly."
-      },
+      { reply: "AI service error. Please try again shortly." },
       { status: 200 }
     );
   }
